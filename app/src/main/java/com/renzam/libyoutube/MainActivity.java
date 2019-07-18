@@ -4,10 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.PlayerConstants;
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.YouTubePlayerListener;
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,8 +27,6 @@ public class MainActivity extends AppCompatActivity {
 
         RecyclerView.Adapter recyclerViewAdapter = new Adapter(this,videoIds, this.getLifecycle());
         recyclerView.setAdapter(recyclerViewAdapter);
-
-
 
 
 
