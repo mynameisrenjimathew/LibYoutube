@@ -1,8 +1,11 @@
 package com.renzam.libyoutube;
 import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.ui.PlayerUiController;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -10,15 +13,13 @@ public class MainActivity extends AppCompatActivity {
     //YouTubePlayerView youTubePlayerView;
     RecyclerView recyclerView;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         recyclerView = findViewById(R.id.recycleview);
-       recyclerView.setHasFixedSize(true);
+        recyclerView.setHasFixedSize(true);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(mLayoutManager);

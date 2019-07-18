@@ -1,5 +1,4 @@
 package com.renzam.libyoutube;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -12,12 +11,13 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.Abs
 
 
 
-
 public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
     Context context;
     private String[] videoIds;
     private Lifecycle lifecycle;
+
+
 
     public Adapter(Context context, String[] videoIds, Lifecycle lifecycle) {
         this.context = context;
@@ -43,7 +43,6 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
     }
 
-
     @Override
     public int getItemCount() {
         return videoIds.length;
@@ -63,10 +62,12 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
                 public void onReady(@NonNull YouTubePlayer initializedYouTubePlayer) {
                     youTubePlayer = initializedYouTubePlayer;
                     youTubePlayer.cueVideo(currentVideoId, 0);
+
+                    youTubePlayerView.getPlayerUiController();
+
                 }
             });
         }
-
         void cueVideo(String videoId) {
             currentVideoId = videoId;
 
@@ -74,6 +75,6 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
                 return;
 
             youTubePlayer.cueVideo(videoId, 0);
-        }
+ }
     }
 }
