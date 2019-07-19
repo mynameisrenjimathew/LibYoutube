@@ -47,8 +47,12 @@ class Adapter(private val context: Context, private val videoIds: Array<String>,
                     //                    playerUiController.setFullScreenButton
                     playerUiController.setCustomAction1(context.resources.getDrawable(R.drawable.ic_fullscreen), View.OnClickListener { youTubePlayerView.enterFullScreen() })
 
+                    playerUiController.setCustomAction1(context.resources.getDrawable(R.drawable.ic_fullscreen), View.OnClickListener { youTubePlayerView.toggleFullScreen() })
+
+
                 }
             })
+
         }
 
         fun cueVideo(videoId: String) {
