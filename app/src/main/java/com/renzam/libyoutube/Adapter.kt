@@ -56,12 +56,7 @@ class Adapter(private val context: Context, private val videoIds: Array<String>,
 
                     youTubePlayerView.toggleFullScreen()
 
-
-//                    val intent = Intent(context, FullscreenActivity::class.java)
-//                    intent.putExtra("vidiedoId",videoIds[position])
-//                    context.startActivity(intent)
-
-                    //Intent direct Youtube FullScreen
+                    //Intent to direct Youtube FullScreen
                     val intent = Intent(Intent.ACTION_VIEW,
                     Uri.parse("http://www.youtube.com/watch?v=" + videoIds[position]))
                     intent.putExtra("force_fullscreen", true)
