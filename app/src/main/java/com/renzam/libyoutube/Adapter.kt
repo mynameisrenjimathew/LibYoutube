@@ -2,6 +2,7 @@ package com.renzam.libyoutube
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,10 +17,6 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.You
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.ui.PlayerUiController
 import androidx.core.content.ContextCompat.startActivity
 import androidx.core.content.ContextCompat.startActivity
-
-
-
-
 
 class Adapter(private val context: Context, private val videoIds: Array<String>, private val lifecycle: Lifecycle) : RecyclerView.Adapter<Adapter.ViewHolder>() {
 
@@ -52,7 +49,6 @@ class Adapter(private val context: Context, private val videoIds: Array<String>,
                     youTubePlayer = initializedYouTubePlayer
                     youTubePlayer!!.cueVideo(currentVideoId!!, 0f)
 
-
                 }
             })
             youTubePlayerView.addFullScreenListener(object : YouTubePlayerFullScreenListener {
@@ -60,12 +56,20 @@ class Adapter(private val context: Context, private val videoIds: Array<String>,
 
                     youTubePlayerView.toggleFullScreen()
 
-                    val intent = Intent(context, FullscreenActivity::class.java)
-                    intent.putExtra("vidiedoId",videoIds[position])
+
+//                    val intent = Intent(context, FullscreenActivity::class.java)
+//                    intent.putExtra("vidiedoId",videoIds[position])
+//                    context.startActivity(intent)
+
+                    //Intent direct Youtube FullScreen
+                    val intent = Intent(Intent.ACTION_VIEW,
+                    Uri.parse("http://www.youtube.com/watch?v=" + videoIds[position]))
+                    intent.putExtra("force_fullscreen", true)
                     context.startActivity(intent)
                 }
 
                 override fun onYouTubePlayerExitFullScreen() {
+
 
                 }
             })
