@@ -1,15 +1,25 @@
 package com.renzam.libyoutube
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.Lifecycle
 import androidx.recyclerview.widget.RecyclerView
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.YouTubePlayerFullScreenListener
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.ui.PlayerUiController
+import androidx.core.content.ContextCompat.startActivity
+import androidx.core.content.ContextCompat.startActivity
+
+
+
+
 
 class Adapter(private val context: Context, private val videoIds: Array<String>, private val lifecycle: Lifecycle) : RecyclerView.Adapter<Adapter.ViewHolder>() {
 
@@ -20,12 +30,11 @@ class Adapter(private val context: Context, private val videoIds: Array<String>,
         lifecycle.addObserver(youTubePlayerView)
         return ViewHolder(youTubePlayerView)
 
+
     }
 
     override fun onBindViewHolder(holder: Adapter.ViewHolder, position: Int) {
-
         holder.cueVideo(videoIds[position])
-
     }
 
     override fun getItemCount(): Int {
@@ -43,12 +52,20 @@ class Adapter(private val context: Context, private val videoIds: Array<String>,
                     youTubePlayer = initializedYouTubePlayer
                     youTubePlayer!!.cueVideo(currentVideoId!!, 0f)
 
-                    val playerUiController = youTubePlayerView.getPlayerUiController()
-                    //                    playerUiController.setFullScreenButton
-                    playerUiController.setCustomAction1(context.resources.getDrawable(R.drawable.ic_fullscreen), View.OnClickListener { youTubePlayerView.enterFullScreen() })
 
-                    playerUiController.setCustomAction1(context.resources.getDrawable(R.drawable.ic_fullscreen), View.OnClickListener { youTubePlayerView.toggleFullScreen() })
+                }
+            })
+            youTubePlayerView.addFullScreenListener(object : YouTubePlayerFullScreenListener {
+                override fun onYouTubePlayerEnterFullScreen() {
 
+                    youTubePlayerView.toggleFullScreen()
+
+                    val intent = Intent(context, FullscreenActivity::class.java)
+                    intent.putExtra("vidiedoId",videoIds[position])
+                    context.startActivity(intent)
+                }
+
+                override fun onYouTubePlayerExitFullScreen() {
 
                 }
             })
@@ -62,6 +79,7 @@ class Adapter(private val context: Context, private val videoIds: Array<String>,
                 return
 
             youTubePlayer!!.cueVideo(videoId, 0f)
+
         }
     }
 }
