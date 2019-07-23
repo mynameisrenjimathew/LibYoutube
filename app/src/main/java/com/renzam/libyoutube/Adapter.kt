@@ -31,7 +31,10 @@ class Adapter(private val context: Context, private val videoIds: Array<String>,
     }
 
     override fun onBindViewHolder(holder: Adapter.ViewHolder, position: Int) {
-        holder.cueVideo(videoIds[position])
+
+
+            holder.cueVideo(videoIds[position])
+
     }
 
     override fun getItemCount(): Int {
@@ -62,8 +65,9 @@ class Adapter(private val context: Context, private val videoIds: Array<String>,
                     intent.putExtra("force_fullscreen", true)
                     context.startActivity(intent)
                 }
-
                 override fun onYouTubePlayerExitFullScreen() {
+
+                    Toast.makeText(context,"Full screen exited",Toast.LENGTH_SHORT).show()
 
 
                 }
